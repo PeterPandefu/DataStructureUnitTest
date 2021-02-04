@@ -14,7 +14,11 @@ namespace DataStructureUnitTest
             _maxValue = default;
         }
 
-
+        /// <summary>
+        /// 获取n个数中的的最大值
+        /// </summary>
+        /// <param name="expected">预期值</param>
+        /// <param name="arr">数据源</param>
         [TestMethod]
         [DataRow(99, new int[10] { 12, 24, 90, 73, 84, 56, 48, 27, 19, 99 })]
         public void GetMaxVal(int expected, int[] arr)
