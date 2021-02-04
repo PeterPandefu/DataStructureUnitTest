@@ -12,6 +12,7 @@ namespace DataStructureUnitTest
         public static void AssemblyInit(TestContext context)
         {
             _maxValue = default;
+            _maxVal = default;
         }
 
         /// <summary>

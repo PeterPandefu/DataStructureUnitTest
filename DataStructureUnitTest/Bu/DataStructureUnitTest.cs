@@ -7,27 +7,29 @@ namespace DataStructureUnitTest
 {
     public partial class DataStructureUnitTest
     {
-       
+        private static int _maxVal;
+        
+        #region 1.获取数组中的最大值
         /// <summary>
         /// 获取数组中的最大值
         /// </summary>
         /// <param name="expectedValue">期望值</param>
         /// <param name="array">数据源</param>
         [TestMethod]
-        [DataRow(90,new int[10] { 3,57,90,30,45,80,70,26,56,78})]
-        public void GetMaxValue(int expectedValue,int[] array)
+        [DataRow(90, new int[10] { 3, 57, 90, 30, 45, 80, 70, 26, 56, 78 })]
+        public void GetMaxValue(int expectedValue, int[] array)
         {
             //方法一:使用迭代的方法
             for (int i = 0; i < array.Length; i++)
             {
-                _maxValue = GetMaxByIteration(array[i],_maxValue);
+                _maxVal = GetMaxByIteration(array[i], _maxVal);
             }
-            Assert.AreEqual(expectedValue,_maxValue);
+            Assert.AreEqual(expectedValue, _maxVal);
 
             //方法二:使用递归的方法
-            _maxValue = default;
-            _maxValue = GetMaxByRecursion(array,0,array.Length-1);
-            Assert.AreEqual(expectedValue,_maxValue);
+            _maxVal = default;
+            _maxVal = GetMaxByRecursion(array, 0, array.Length - 1);
+            Assert.AreEqual(expectedValue, _maxVal);
         }
         public static int GetMaxByIteration(int a, int b)
         {
@@ -43,16 +45,18 @@ namespace DataStructureUnitTest
             }
             else
             {
-                _maxValue = GetMaxByRecursion(arr, i + 1, j);
-                if (arr[i] > _maxValue)
+                _maxVal = GetMaxByRecursion(arr, i + 1, j);
+                if (arr[i] > _maxVal)
                 {
                     return arr[i];
                 }
                 else
                 {
-                    return _maxValue;
+                    return _maxVal;
                 }
             }
         }
+        #endregion
+
     }
 }

@@ -179,6 +179,7 @@ H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\bin\Debug\netc
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\obj\Debug\netcoreapp3.1\DataStructureUnitTest.csprojAssemblyReference.cache
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\obj\Debug\netcoreapp3.1\DataStructureUnitTest.csproj.CoreCompileInputs.cache
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\obj\Debug\netcoreapp3.1\DataStructureUnitTest.AssemblyInfoInputs.cache
 H:\Code\Git\Ourselves\DataStructureUnitTest\DataStructureUnitTest\obj\Debug\netcoreapp3.1\DataStructureUnitTest.AssemblyInfo.cs
