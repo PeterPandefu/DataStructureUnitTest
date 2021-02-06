@@ -22,10 +22,54 @@ namespace DataStructureUnitTest.Peter.Pan
         //你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
         //你可以按任意顺序返回答案。
         [TestMethod]
-        [DataRow(99, new int[10] { 12, 24, 90, 73, 84, 56, 48, 27, 19, 99 })]
-        public void LeetCode_Method_1(int expected, int[] arr)
+        [TestCategory("已完成的测试")]
+        [DataRow(31, new int[10] { 12, 24, 90, 73, 84, 56, 48, 27, 19, 99 })]
+        public void LeetCode_No1(int expected, int[] arr)
         {
+            //思路1 循环比较 
+            LeetCode_No1_Method1(expected, arr, out int index1, out int index2);
+            Assert.AreEqual(expected, arr[index1] + arr[index2]);
+            //思路2 哈希
+            LeetCode_No1_Method2(expected, arr, out index1, out index2);
+            Assert.AreEqual(expected, arr[index1] + arr[index2]);
 
+        }
+
+        public void LeetCode_No1_Method1(int expected, int[] arr, out int index1, out int index2)
+        {
+            index1 = default;
+            index2 = default;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                //因为数组中的元素不能用两遍 所以j只能从i之后开始循环 
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[i] + arr[j] == expected)
+                    {
+                        index1 = i;
+                        index2 = j;
+                    }
+                }
+            }
+
+            //两个循环 
+        }
+
+        public void LeetCode_No1_Method2(int expected, int[] arr, out int index1, out int index2)
+        {
+            index1 = default;
+            index2 = default;
+
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (dic.ContainsKey(expected- arr[i]))
+                {
+                    index1 = dic[expected - arr[i]];
+                    index2 = i;
+                }
+                dic.Add(arr[i], i);
+            }
         }
 
         #endregion
