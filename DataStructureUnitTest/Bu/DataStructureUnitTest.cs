@@ -76,13 +76,5 @@ namespace DataStructureUnitTest.Bu
         {
 
         }
-        public void test_4()
-        {
-
-        }
-        public void test_5()
-        {
-
-        }
     }
 }
