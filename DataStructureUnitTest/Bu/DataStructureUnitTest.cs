@@ -64,21 +64,5 @@ namespace DataStructureUnitTest.Bu
         }
         #endregion
 
-        public void test_1()
-        {
-            
-        }
-        public void test_2()
-        {
-
-        }
-        public void test_3()
-        {
-
-        }
-        public void test_4()
-        {
-
-        }
     }
 }
