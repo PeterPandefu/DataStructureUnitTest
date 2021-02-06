@@ -14,7 +14,9 @@ namespace DataStructureUnitTest.Peter.Pan
             _maxValue = default;
 
         }
+        #region 获取n个数中的的最大值
 
+       
         /// <summary>
         /// 获取n个数中的的最大值
         /// </summary>
@@ -44,7 +46,7 @@ namespace DataStructureUnitTest.Peter.Pan
 
         public static int Recursion(int[] array, int a = default, int b = default, int index = 0)
         {
-            if (index <= array.Length)
+            if (index <array.Length)
             {
                 if (index == array.Length)
                 {
@@ -58,6 +60,10 @@ namespace DataStructureUnitTest.Peter.Pan
             }
             return _maxValue;
         }
+        #endregion
 
+        #region MyRegion
+
+        #endregion
     }
 }
