@@ -3,4 +3,5 @@
 ################################################################################
 
 /DataStructureUnitTest/obj
-/.vs/DataStructureUnitTest
+/.vs
+/DataStructureUnitTest/bin/Debug/netcoreapp3.1
