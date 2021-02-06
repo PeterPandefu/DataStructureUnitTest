@@ -23,6 +23,7 @@ namespace DataStructureUnitTest.Peter.Pan
         /// <param name="expected">预期值</param>
         /// <param name="arr">数据源</param>
         [TestMethod]
+        [TestCategory("已完成的测试")]
         [DataRow(99, new int[10] { 12, 24, 90, 73, 84, 56, 48, 27, 19, 99 })]
         public void GetMaxVal(int expected, int[] arr)
         {
@@ -62,8 +63,5 @@ namespace DataStructureUnitTest.Peter.Pan
         }
         #endregion
 
-        #region MyRegion
-
-        #endregion
     }
 }
