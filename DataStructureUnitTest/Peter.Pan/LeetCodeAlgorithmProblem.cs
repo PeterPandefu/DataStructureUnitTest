@@ -34,6 +34,15 @@ namespace DataStructureUnitTest.Peter.Pan
         {
 
         }
+        public void LeetCode_Method_3(int expected, int[] arr)
+        {
+
+        }
+
+        public void LeetCode_Method_4(int expected, int[] arr)
+        {
+
+        }
         #endregion
 
     }
