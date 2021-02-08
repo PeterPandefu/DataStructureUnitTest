@@ -43,7 +43,14 @@ namespace DataStructureUnitTest.Bu
         [DataRow(1,new int[] { 2,7,11,15},new int[] { 9})]
         [DataRow(12, new int[] { 3, 2, 4 },new int[]{6})]
         [DataRow(1, new int[] { 3, 3 }, new int[] { 6 })]
-        public void AddSum(int expectedValue, int[] arr1,int[] target)
+        public void AddSum_No1(int expectedValue, int[] arr1,int[] target)
+        {
+
+            int res = AddSum_Method(arr1,target);
+            Assert.AreEqual(expectedValue, res);
+        }
+
+        public int AddSum_Method(int[] arr1, int[] target) 
         {
             int[] indexs = new int[2];
             Dictionary<int, int> dic = new Dictionary<int, int>();//key保存arr1的值，value保存下标
@@ -51,18 +58,19 @@ namespace DataStructureUnitTest.Bu
             {
                 if (dic.ContainsKey(arr1[i]))
                 {
-                    dic.TryGetValue(arr1[i],out indexs[0]);
+                    dic.TryGetValue(arr1[i], out indexs[0]);
                     indexs[1] = i;
                     break;
                 }
                 else
                 {
-                    dic.Add(target[0]-arr1[i],i);
+                    dic.Add(target[0] - arr1[i], i);
                 }
             }
-            int a = int.Parse(string.Join("", indexs));
-            Assert.AreEqual(expectedValue,a);
+            return int.Parse(string.Join("",indexs));
         }
         #endregion
+
+
     }
 }
