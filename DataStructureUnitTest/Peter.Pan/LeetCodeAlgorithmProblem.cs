@@ -102,13 +102,45 @@ namespace DataStructureUnitTest.Peter.Pan
         [DataRow(10009998, new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 })]
         public void LeetCode_No2(int expected, int[] arr1, int[] arr2)
         {
-
             LinkedList<int> linkedListA = new LinkedList<int>(arr1);
             LinkedList<int> linkedListB = new LinkedList<int>(arr2);
 
-
             LinkedListNode<int> elementA = linkedListA.First;
             LinkedListNode<int> elementB = linkedListB.First;
+
+            //简单实现  就是把两个链表补充成长度一样的链表 两两相加 最后一位有进位的在补一个
+            LinkedListNode<int> newNode1 = LeetCode_No2_Method1(elementA, elementB);
+            int res = GetResultByLinkedListNode(newNode1);
+
+            Assert.AreEqual(expected, res);
+            //根据链表特性实现
+            LinkedListNode<int> newNode2 = LeetCode_No2_Method2(elementA, elementB);
+
+            res = GetResultByLinkedListNode(newNode2);
+            Assert.AreEqual(expected, res);
+        }
+
+        private int GetResultByLinkedListNode(LinkedListNode<int> newNode1)
+        {
+            List<int> resList = new List<int>();
+            foreach (var item in newNode1.List)
+            {
+                resList.Add(item);
+            }
+            int res = 0;
+            //倒叙计算
+            resList.Reverse();
+            resList.ForEach(t => { res = res * 10 + t; });
+            return res;
+
+        }
+
+        private LinkedListNode<int> LeetCode_No2_Method1(LinkedListNode<int> elementA, LinkedListNode<int> elementB)
+        {
+            LinkedListNode<int> headA = new LinkedListNode<int>(0);
+            elementA.List.AddFirst(headA);
+            LinkedListNode<int> headB = new LinkedListNode<int>(0);
+            elementB.List.AddFirst(headB);
 
             //获取两个链表的长度
             int linkedListALength = 0;
@@ -124,16 +156,19 @@ namespace DataStructureUnitTest.Peter.Pan
                 elementB = elementB.Next;
                 linkedListBLength++;
             }
-            elementA = linkedListA.First;
-            elementB = linkedListB.First;
+
+            elementA = headA.Next;
+            elementB = headB.Next;
 
             //填充短链表  填0
+            //接着让  elementA elementB指向链表的除head外第一个元素
             if (linkedListALength > linkedListBLength)
             {
                 for (int i = 0; i < linkedListALength - linkedListBLength; i++)
                 {
                     elementB.List.AddLast(new LinkedListNode<int>(0));
                 }
+                elementA = headA.Next;
             }
             if (linkedListALength < linkedListBLength)
             {
@@ -141,22 +176,18 @@ namespace DataStructureUnitTest.Peter.Pan
                 {
                     elementA.List.AddLast(new LinkedListNode<int>(0));
                 }
+                elementB = headA.Next;
             }
-
-            //接着让  elementA elementB指向链表的第一个元素
-            elementA = linkedListA.First;
-            elementB = linkedListB.First;
 
             //得到的结果
             List<int> resList = new List<int>();
-            int res = 0;
-
             int v1 = 0;
             int v2 = 0;
 
             //是否需要进位
             int carry = 0;
 
+            LinkedList<int> ls = new LinkedList<int>();
             //循环次数
             int cycles = linkedListALength > linkedListBLength ? linkedListALength : linkedListBLength;
             for (int i = 0; i < cycles; i++)
@@ -165,26 +196,87 @@ namespace DataStructureUnitTest.Peter.Pan
                 v2 = elementB.Value;
                 int num = (v1 + v2 + carry) % 10;
                 carry = (v1 + v2 + carry) / 10;
-                resList.Add(num);
+                ls.AddLast(num);
                 elementA = elementA.Next;
                 elementB = elementB.Next;
 
                 //若最后一位有进位 则再新增一个
                 if (i == cycles - 1 && carry == 1)
                 {
-                    resList.Add(1);
+                    ls.AddLast(1);
                 }
             }
-            //将结果倒叙算值
-            resList.Reverse();
-            if (resList.Count > 0) resList.ForEach(t => { res = res * 10 + t; });
 
-            Assert.AreEqual(expected, res);
+            return ls.First;
+        }
 
+        private LinkedListNode<int> LeetCode_No2_Method2(LinkedListNode<int> elementA, LinkedListNode<int> elementB)
+        {
+            LinkedList<int> ls = new LinkedList<int>();
+            int v1 = 0;
+            int v2 = 0;
+
+            //是否需要进位
+            int carry = 0;
+
+            //循环次数
+            while (elementA != null || elementB != null)
+            {
+                v1 = elementA == null ? 0 : elementA.Value;
+                v2 = elementB == null ? 0 : elementB.Value;
+
+                int num = (v1 + v2 + carry) % 10;
+                carry = (v1 + v2 + carry) / 10;
+                ls.AddLast(num);
+                if (elementA != null) elementA = elementA.Next;
+                if (elementB != null) elementB = elementB.Next;
+
+
+                //如果两个链表都循环完毕 并且有进位  则增加一个
+                if (elementA == null && elementB == null && carry == 1)
+                {
+                    ls.AddLast(1);
+                }
+            }
+
+            return ls.First;
         }
 
 
 
+        #endregion
+
+        #region 3. 无重复字符的最长子串
+        //示例 1:
+        //输入: s = "abcabcbb"
+        //输出: 3 
+        //解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+        //示例 2:
+        //输入: s = "bbbbb"
+        //输出: 1
+        //解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+        //示例 3:
+        //输入: s = "pwwkew"
+        //输出: 3
+        //解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+        //     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+        //示例 4:
+        //输入: s = ""
+        //输出: 0
+
+        [TestMethod]
+        [TestCategory("未完成的测试")]
+        [DataRow(3, "abcabcbb")]
+        [DataRow(1, "bbbbb")]
+        [DataRow(3, "pwwkew")]
+        [DataRow(0, "")]
+        public void LeetCode_No3(int expected, string str)
+        {
+
+        }
 
         #endregion
     }
