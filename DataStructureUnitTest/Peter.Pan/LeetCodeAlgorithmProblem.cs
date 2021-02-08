@@ -17,6 +17,7 @@ namespace DataStructureUnitTest.Peter.Pan
         {
 
         }
+
         #region 1 两数之和
         //给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 的那 两个 整数，并返回它们的数组下标。
         //你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
@@ -207,6 +208,8 @@ namespace DataStructureUnitTest.Peter.Pan
                 }
             }
 
+            // 因为两个链表长度一样为n  执行次数为链表长度 所以时间复杂度为O(n)
+
             return ls.First;
         }
 
@@ -238,7 +241,7 @@ namespace DataStructureUnitTest.Peter.Pan
                     ls.AddLast(1);
                 }
             }
-
+            // 执行次数那个链表长度长 就执行多少次 所以时间复杂度为O(max(m,n))
             return ls.First;
         }
 
@@ -273,11 +276,81 @@ namespace DataStructureUnitTest.Peter.Pan
         [DataRow(1, "bbbbb")]
         [DataRow(3, "pwwkew")]
         [DataRow(0, "")]
+        [DataRow(1, " ")]
+        [DataRow(2, "aua")]
+        [DataRow(2, "au")]
+        [DataRow(1, "aa")]
+        [DataRow(2, "aab")]
         public void LeetCode_No3(int expected, string str)
         {
+            //简单实现
+            int res = LeetCode_No3_Method1(str);
 
+            Assert.AreEqual(expected, res);
+
+            //滑动窗口实现  保证每个窗口里字母都是唯一的
+            //没有重复字符时 调整右边界  有重复字符时调整左边界
+            res = LeetCode_No3_Method2(str);
+
+            Assert.AreEqual(expected, res);
         }
 
+        private int LeetCode_No3_Method1(string str)
+        {
+            if (str.Length <= 1) return str.Length;
+
+            StringBuilder sb = new StringBuilder();
+            //用来存放所有所有的不重复的字符串
+            List<char> charList = new List<char>();
+            int maxLength = 0;
+            for (int i = 0; i < str.Length; i++)  //控制外循环
+            {
+
+                for (int j = i; j < str.Length; j++)  //控制内循环
+                {
+
+                    if (charList.Contains(str[j]))
+                    {
+                        string temp = sb.ToString();
+                        maxLength = temp.Length > maxLength ? temp.Length : maxLength;
+                        sb.Clear();
+                        charList.Clear();
+                        break;
+                    }
+                    charList.Add(str[j]);
+                    sb.Append(str[j]);
+
+                }
+            }
+            //  执行次数为 n+(n-1)+(n-2)+...+1  时间复杂度为O(n^2)
+            return maxLength;
+        }
+        private int LeetCode_No3_Method2(string s)
+        {
+            // 哈希集合，记录每个字符是否出现过
+            HashSet<char> occ = new HashSet<char>();
+            int n = s.Length;
+            // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+            int rk = -1, ans = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                if (i != 0)
+                {
+                    // 左指针向右移动一格，移除一个字符
+                    occ.Remove(s[i - 1]);
+                }
+                while (rk + 1 < n && !occ.Contains(s[rk + 1]))
+                {
+                    // 不断地移动右指针
+                    occ.Add(s[rk + 1]);
+                    ++rk;
+                }
+                // 第 i 到 rk 个字符是一个极长的无重复字符子串
+                ans = Math.Max(ans, rk - i + 1);
+            }
+            return ans;
+
+        }
         #endregion
     }
 }
