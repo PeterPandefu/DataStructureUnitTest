@@ -22,6 +22,7 @@ namespace DataStructureUnitTest.Bu
         /// <param name="expectedValue">期望值</param>
         /// <param name="array">数据源</param>
         [TestMethod]
+        [TestCategory("已完成测试")]
         [DataRow(90, new int[10] { 3, 57, 90, 30, 45, 80, 70, 26, 56, 78 })]
         public void GetMaxValue(int expectedValue, int[] array)
         {
