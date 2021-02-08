@@ -271,7 +271,7 @@ namespace DataStructureUnitTest.Peter.Pan
         //输出: 0
 
         [TestMethod]
-        [TestCategory("未完成的测试")]
+        [TestCategory("已完成的测试")]
         [DataRow(3, "abcabcbb")]
         [DataRow(1, "bbbbb")]
         [DataRow(3, "pwwkew")]
@@ -352,5 +352,6 @@ namespace DataStructureUnitTest.Peter.Pan
 
         }
         #endregion
+
     }
 }
