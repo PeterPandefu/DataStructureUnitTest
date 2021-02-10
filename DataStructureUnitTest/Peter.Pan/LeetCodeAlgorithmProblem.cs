@@ -353,5 +353,182 @@ namespace DataStructureUnitTest.Peter.Pan
         }
         #endregion
 
+        #region 4. 寻找两个正序数组的中位数
+        //给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的中位数。
+        //进阶：你能设计一个时间复杂度为 O(log (m+n)) 的算法解决此问题吗？
+
+        //示例 1：
+        //输入：nums1 = [1,3], nums2 = [2]
+        //输出：2.00000
+        //解释：合并数组 = [1,2,3] ，中位数 2
+
+        //示例 2：
+        //输入：nums1 = [1,2], nums2 = [3,4]
+        //输出：2.50000
+        //解释：合并数组 = [1,2,3,4] ，中位数(2 + 3) / 2 = 2.5
+
+        //示例 3：
+        //输入：nums1 = [0,0], nums2 = [0,0]
+        //输出：0.00000
+
+        //示例 4：
+        //输入：nums1 = [], nums2 = [1]
+        //输出：1.00000
+
+        //示例 5：
+        //输入：nums1 = [2], nums2 = []
+        //输出：2.00000
+
+        [TestMethod]
+        [TestCategory("未开始")]
+        [DataRow(2.00000f, new int[] { 1, 3 }, new int[] { 2 })]
+        [DataRow(2.50000f, new int[] { 1, 2 }, new int[] { 3, 4 })]
+        [DataRow(0.00000f, new int[] { 0, 0 }, new int[] { 0, 0 })]
+        [DataRow(1.00000f, new int[] { }, new int[] { 1 })]
+        [DataRow(2.00000f, new int[] { 2 }, new int[] { })]
+        public void LeetCode_No4(int expected, string str)
+        {
+        }
+        #endregion
+
+        #region 5. 最长回文子串
+        //给你一个字符串 s，找到 s 中最长的回文子串。
+
+        //示例 1：
+        //输入：s = "babad"
+        //输出："bab"
+        //解释："aba" 同样是符合题意的答案。
+
+        //示例 2：
+        //输入：s = "cbbd"
+        //输出："bb"
+
+        //示例 3：
+        //输入：s = "a"
+        //输出："a"
+
+        //示例 4：
+        //输入：s = "ac"
+        //输出："a"
+        [TestMethod]
+        [TestCategory("未开始")]
+        [DataRow(2, new int[] { 1, 3 }, new int[] { 2 })]
+        [DataRow(1, new int[] { 1, 2 }, new int[] { 3, 4 })]
+        [DataRow(3, new int[] { 0, 0 }, new int[] { 0, 0 })]
+        [DataRow(0, new int[] { }, new int[] { 1 })]
+        [DataRow(1, new int[] { 2 }, new int[] { })]
+        public void LeetCode_No5(int expected, string str)
+        {
+        }
+        #endregion
+
+        #region 6. Z 字形变换
+        //将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+        //比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
+
+        //P   A   H   N
+        //A P L S I I G
+        //Y   I   R
+
+        //之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如："PAHNAPLSIIGYIR"。
+
+        //示例 1：
+        //输入：s = "PAYPALISHIRING", numRows = 3
+        //输出："PAHNAPLSIIGYIR"
+
+        //示例 2：
+        //输入：s = "PAYPALISHIRING", numRows = 4
+        //输出："PINALSIGYAHRPI"
+        //解释：
+        //P     I    N
+        //A   L S  I G
+        //Y A   H R
+        //P     I
+
+        //示例 3：
+        //输入：s = "A", numRows = 1
+        //输出："A"
+        [TestMethod]
+        [TestCategory("未开始")]
+        [DataRow("PAHNAPLSIIGYIR", 3, "PAYPALISHIRING")]
+        [DataRow("PINALSIGYAHRPI", 4, "PAYPALISHIRING")]
+        [DataRow("A", 1, "A")]
+        public void LeetCode_No6(int expectedStr, int numRows, string sourceStr)
+        {
+
+
+        }
+        #endregion
+
+        #region 7. 整数反转
+        //给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。
+        //如果反转后整数超过 32 位的有符号整数的范围[−2^31, 2^31 − 1] ，就返回 0。
+        //假设环境不允许存储 64 位整数（有符号或无符号）。
+
+        //示例 1：
+        //输入：x = 123
+        //输出：321
+
+        //示例 2：
+        //输入：x = -123
+        //输出：-321
+
+        //示例 3：
+        //输入：x = 120
+        //输出：21
+
+        //示例 4：
+        //输入：x = 0
+        //输出：0
+
+        [TestMethod]
+        [TestCategory("未开始")]
+        [DataRow(321, 123)]
+        [DataRow(-321, -123)]
+        [DataRow(21, 120)]
+        [DataRow(0, 0)]
+        [DataRow(0, 2147483643)]
+        public void LeetCode_No7(int expected, int num)
+        {
+            Int32 res = LeetCode_No7_Method1(num);
+
+
+
+            Assert.AreEqual(expected, res);
+
+        }
+
+        public int LeetCode_No7_Method1(int num)
+        {
+            string numStr = num.ToString();
+            bool isegative = false;
+            if (numStr.Contains("-"))
+            {
+                isegative = true;
+                numStr = numStr.Substring(1, numStr.Length - 1);
+            }
+            char[] charArr = numStr.ToCharArray();
+            int length = charArr.Length;
+            for (int i = 0; i < (int)length / 2; i++)
+            {
+                (charArr[i], charArr[length - 1 - i]) = (charArr[length - 1 - i], charArr[i]);
+            }
+
+            int res = 0;
+
+            try
+            {
+                res = Convert.ToInt32(string.Concat(charArr));
+                if (isegative) res = -res;
+            }
+            catch (Exception)
+            {
+                res = 0;
+
+            }
+            return res;
+        }
+
+        #endregion
     }
 }
